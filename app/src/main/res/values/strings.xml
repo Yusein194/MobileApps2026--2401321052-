@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">ShopList</string>
+    <string name="title_list">Моят списък</string>
+    <string name="title_item">Продукт</string>
+    <string name="add_item">Добави</string>
+    <string name="empty_list">Списъкът е празен.\nНатисни „Добави“, за да започнеш.</string>
+    <string name="hint_name">Име на продукта</string>
+    <string name="hint_quantity">Количество</string>
+    <string name="hint_category">Категория (по желание)</string>
+    <string name="save">Запази</string>
+    <string name="error_empty_name">Въведи име</string>
+    <string name="error_quantity">Въведи количество, по-голямо от 0</string>
+    <string name="item_deleted">Продуктът е изтрит</string>
+    <string name="undo">Отмени</string>
+    <string name="item_details">%1$d бр. · %2$s</string>
+    <string name="mark_bought">Купено</string>
 </resources>
