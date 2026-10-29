@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/itemListFragment">
+
+    <fragment
+        android:id="@+id/itemListFragment"
+        android:name="com.yusein.shoplist.ui.ItemListFragment"
+        android:label="@string/title_list"
+        tools:layout="@layout/fragment_item_list">
+        <action
+            android:id="@+id/action_list_to_addEdit"
+            app:destination="@id/addEditItemFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addEditItemFragment"
+        android:name="com.yusein.shoplist.ui.AddEditItemFragment"
+        android:label="@string/title_item"
+        tools:layout="@layout/fragment_add_edit_item">
+        <argument
+            android:name="itemId"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </fragment>
+
+</navigation>
