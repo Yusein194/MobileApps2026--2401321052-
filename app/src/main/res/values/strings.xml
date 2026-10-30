@@ -14,4 +14,6 @@
     <string name="undo">Отмени</string>
     <string name="item_details">%1$d бр. · %2$s</string>
     <string name="mark_bought">Купено</string>
+    <string name="share_list">Сподели списъка</string>
+    <string name="nothing_to_share">Няма некупени продукти за споделяне</string>
 </resources>

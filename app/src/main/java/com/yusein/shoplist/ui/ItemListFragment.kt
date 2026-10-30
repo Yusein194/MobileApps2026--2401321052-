@@ -1,13 +1,19 @@
 package com.yusein.shoplist.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +45,7 @@ class ItemListFragment : Fragment() {
         )
         binding.recyclerView.adapter = adapter
         attachSwipeToDelete(adapter)
+        setupShareMenu()
 
         // Observer pattern: списъкът се обновява сам при промяна в базата
         viewModel.items.observe(viewLifecycleOwner) { items ->
@@ -47,6 +54,39 @@ class ItemListFragment : Fragment() {
         }
 
         binding.fabAdd.setOnClickListener { openEditor(0L) }
+    }
+
+    private fun setupShareMenu() {
+        // viewLifecycleOwner премахва менюто, когато излезем от този екран
+        requireActivity().addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_list, menu)
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    if (menuItem.itemId != R.id.action_share) return false
+                    shareList()
+                    return true
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.RESUMED,
+        )
+    }
+
+    private fun shareList() {
+        val items = viewModel.items.value.orEmpty()
+        if (items.all { it.isBought }) {
+            Snackbar.make(binding.root, R.string.nothing_to_share, Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
+        val sendIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, ShareTextBuilder.build(items))
+        }
+        startActivity(Intent.createChooser(sendIntent, getString(R.string.share_list)))
     }
 
     private fun openEditor(itemId: Long) {
@@ -77,6 +117,6 @@ class ItemListFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null // предотвратява memory leak
+        _binding = null
     }
 }
