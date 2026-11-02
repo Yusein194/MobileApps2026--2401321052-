@@ -36,9 +36,11 @@ class AddEditItemFragment : Fragment() {
             viewModel.loadItem(itemId).observe(viewLifecycleOwner) { item ->
                 if (item != null && existingItem == null) {
                     existingItem = item
-                    binding.editName.setText(item.name)
-                    binding.editQuantity.setText(item.quantity.toString())
-                    binding.editCategory.setText(item.category)
+                    if (savedInstanceState == null) {
+                        binding.editName.setText(item.name)
+                        binding.editQuantity.setText(item.quantity.toString())
+                        binding.editCategory.setText(item.category)
+                    }
                 }
             }
         }
