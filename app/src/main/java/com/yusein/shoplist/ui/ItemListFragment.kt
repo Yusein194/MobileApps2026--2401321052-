@@ -36,13 +36,17 @@ class ItemListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ShoppingAdapter(
-            onItemClick = { item -> openEditor(item.id) },
-            onBoughtClick = { item -> viewModel.toggleBought(item) },
-        )
+        val adapter =
+            ShoppingAdapter(
+                onItemClick = { item -> openEditor(item.id) },
+                onBoughtClick = { item -> viewModel.toggleBought(item) },
+            )
         binding.recyclerView.adapter = adapter
         attachSwipeToDelete(adapter)
         setupShareMenu()
@@ -60,7 +64,10 @@ class ItemListFragment : Fragment() {
         // viewLifecycleOwner премахва менюто, когато излезем от този екран
         requireActivity().addMenuProvider(
             object : MenuProvider {
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                override fun onCreateMenu(
+                    menu: Menu,
+                    menuInflater: MenuInflater,
+                ) {
                     menuInflater.inflate(R.menu.menu_list, menu)
                 }
 
@@ -82,10 +89,11 @@ class ItemListFragment : Fragment() {
             return
         }
 
-        val sendIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, ShareTextBuilder.build(items))
-        }
+        val sendIntent =
+            Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, ShareTextBuilder.build(items))
+            }
         startActivity(Intent.createChooser(sendIntent, getString(R.string.share_list)))
     }
 
@@ -97,21 +105,26 @@ class ItemListFragment : Fragment() {
     }
 
     private fun attachSwipeToDelete(adapter: ShoppingAdapter) {
-        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder,
-            ) = false
+        val callback =
+            object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder,
+                ) = false
 
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = adapter.itemAt(viewHolder.bindingAdapterPosition)
-                viewModel.delete(item)
-                Snackbar.make(binding.root, R.string.item_deleted, Snackbar.LENGTH_LONG)
-                    .setAction(R.string.undo) { viewModel.restore(item) }
-                    .show()
+                override fun onSwiped(
+                    viewHolder: RecyclerView.ViewHolder,
+                    direction: Int,
+                ) {
+                    val item = adapter.itemAt(viewHolder.bindingAdapterPosition)
+                    viewModel.delete(item)
+                    Snackbar
+                        .make(binding.root, R.string.item_deleted, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.undo) { viewModel.restore(item) }
+                        .show()
+                }
             }
-        }
         ItemTouchHelper(callback).attachToRecyclerView(binding.recyclerView)
     }
 

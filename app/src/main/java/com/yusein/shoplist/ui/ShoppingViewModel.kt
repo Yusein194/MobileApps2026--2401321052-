@@ -31,8 +31,9 @@ class ShoppingViewModel(
         if (result != ValidationResult.Valid) return result
 
         val quantity = quantityText.trim().toInt()
-        val item = existing?.copy(name = name.trim(), quantity = quantity, category = category.trim())
-            ?: ShoppingItem(name = name.trim(), quantity = quantity, category = category.trim())
+        val item =
+            existing?.copy(name = name.trim(), quantity = quantity, category = category.trim())
+                ?: ShoppingItem(name = name.trim(), quantity = quantity, category = category.trim())
 
         viewModelScope.launch {
             if (existing == null) repository.insert(item) else repository.update(item)
@@ -53,11 +54,12 @@ class ShoppingViewModel(
     }
 
     companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val app = this[APPLICATION_KEY] as ShopListApplication
-                ShoppingViewModel(app.container.repository)
+        val Factory: ViewModelProvider.Factory =
+            viewModelFactory {
+                initializer {
+                    val app = this[APPLICATION_KEY] as ShopListApplication
+                    ShoppingViewModel(app.container.repository)
+                }
             }
-        }
     }
 }

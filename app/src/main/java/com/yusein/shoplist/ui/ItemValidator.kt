@@ -11,11 +11,16 @@ sealed interface ValidationResult {
 }
 
 object ItemValidator {
-    fun validate(name: String, quantityText: String): ValidationResult {
-        if (name.isBlank()) return ValidationResult.EmptyName
+    fun validate(
+        name: String,
+        quantityText: String,
+    ): ValidationResult {
         val quantity = quantityText.trim().toIntOrNull()
-        if (quantity == null || quantity <= 0) return ValidationResult.InvalidQuantity
-        return ValidationResult.Valid
+        return when {
+            name.isBlank() -> ValidationResult.EmptyName
+            quantity == null || quantity <= 0 -> ValidationResult.InvalidQuantity
+            else -> ValidationResult.Valid
+        }
     }
 }
 

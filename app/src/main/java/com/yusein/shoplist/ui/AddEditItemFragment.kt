@@ -28,7 +28,10 @@ class AddEditItemFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         val itemId = requireArguments().getLong(ARG_ITEM_ID)
@@ -52,12 +55,13 @@ class AddEditItemFragment : Fragment() {
         binding.inputName.error = null
         binding.inputQuantity.error = null
 
-        val result = viewModel.save(
-            existing = existingItem,
-            name = binding.editName.text.toString(),
-            quantityText = binding.editQuantity.text.toString(),
-            category = binding.editCategory.text.toString(),
-        )
+        val result =
+            viewModel.save(
+                existing = existingItem,
+                name = binding.editName.text.toString(),
+                quantityText = binding.editQuantity.text.toString(),
+                category = binding.editCategory.text.toString(),
+            )
         when (result) {
             ValidationResult.Valid -> findNavController().navigateUp()
             ValidationResult.EmptyName -> binding.inputName.error = getString(R.string.error_empty_name)
