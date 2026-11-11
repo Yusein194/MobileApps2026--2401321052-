@@ -6,7 +6,9 @@ import com.yusein.shoplist.data.AppDatabase
 import com.yusein.shoplist.data.RoomShoppingRepository
 import com.yusein.shoplist.data.ShoppingRepository
 
-class AppContainer(context: Context) {
+class AppContainer(
+    context: Context,
+) {
     private val database = AppDatabase.getInstance(context)
     val repository: ShoppingRepository = RoomShoppingRepository(database.shoppingItemDao())
 }

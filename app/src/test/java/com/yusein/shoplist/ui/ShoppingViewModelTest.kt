@@ -102,6 +102,11 @@ class ShoppingViewModelTest {
     fun itemsLiveDataReflectsRepository() {
         viewModel.save(null, "Мляко", "2", "Храна")
 
-        assertEquals("Мляко", viewModel.items.value?.single()?.name)
+        assertEquals(
+            "Мляко",
+            viewModel.items.value
+                ?.single()
+                ?.name,
+        )
     }
 }

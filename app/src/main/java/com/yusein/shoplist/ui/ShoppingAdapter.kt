@@ -14,14 +14,22 @@ class ShoppingAdapter(
     private val onItemClick: (ShoppingItem) -> Unit,
     private val onBoughtClick: (ShoppingItem) -> Unit,
 ) : ListAdapter<ShoppingItem, ShoppingAdapter.ViewHolder>(DiffCallback) {
-    class ViewHolder(val binding: ItemShoppingBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(
+        val binding: ItemShoppingBinding,
+    ) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val binding = ItemShoppingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val item = getItem(position)
         with(holder.binding) {
             textName.text = item.name
@@ -31,11 +39,12 @@ class ShoppingAdapter(
                 } else {
                     textName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
-            textDetails.text = root.context.getString(
-                R.string.item_details,
-                item.quantity,
-                item.category.ifBlank { "-" },
-            )
+            textDetails.text =
+                root.context.getString(
+                    R.string.item_details,
+                    item.quantity,
+                    item.category.ifBlank { "-" },
+                )
             checkBought.isChecked = item.isBought
             checkBought.setOnClickListener { onBoughtClick(item) }
             root.setOnClickListener { onItemClick(item) }
@@ -45,8 +54,14 @@ class ShoppingAdapter(
     fun itemAt(position: Int): ShoppingItem = getItem(position)
 
     private object DiffCallback : DiffUtil.ItemCallback<ShoppingItem>() {
-        override fun areItemsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem) = oldItem.id == newItem.id
+        override fun areItemsTheSame(
+            oldItem: ShoppingItem,
+            newItem: ShoppingItem,
+        ) = oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: ShoppingItem, newItem: ShoppingItem) = oldItem == newItem
+        override fun areContentsTheSame(
+            oldItem: ShoppingItem,
+            newItem: ShoppingItem,
+        ) = oldItem == newItem
     }
 }

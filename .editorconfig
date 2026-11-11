@@ -1,0 +1,7 @@
+root = true
+
+[*.{kt,kts}]
+ktlint_code_style = ktlint_official
+max_line_length = 120
+# _binding е стандартният Android шаблон за ViewBinding във фрагменти
+ktlint_standard_backing-property-naming = disabled

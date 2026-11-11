@@ -18,10 +18,11 @@ class ShareTextBuilderTest {
 
     @Test
     fun skipsBoughtItems() {
-        val items = listOf(
-            ShoppingItem(name = "Мляко", quantity = 2, category = "Храна"),
-            ShoppingItem(name = "Хляб", quantity = 1, category = "Храна", isBought = true),
-        )
+        val items =
+            listOf(
+                ShoppingItem(name = "Мляко", quantity = 2, category = "Храна"),
+                ShoppingItem(name = "Хляб", quantity = 1, category = "Храна", isBought = true),
+            )
 
         val text = ShareTextBuilder.build(items)
 

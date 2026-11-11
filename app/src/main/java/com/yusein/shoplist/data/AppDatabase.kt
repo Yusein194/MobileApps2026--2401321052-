@@ -15,11 +15,13 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase =
             instance ?: synchronized(this) {
-                instance ?: Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "shoplist.db",
-                ).build().also { instance = it }
+                instance ?: Room
+                    .databaseBuilder(
+                        context.applicationContext,
+                        AppDatabase::class.java,
+                        "shoplist.db",
+                    ).build()
+                    .also { instance = it }
             }
     }
 }
