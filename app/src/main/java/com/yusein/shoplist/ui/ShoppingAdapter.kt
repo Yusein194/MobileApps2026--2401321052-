@@ -39,12 +39,9 @@ class ShoppingAdapter(
                 } else {
                     textName.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
-            textDetails.text =
-                root.context.getString(
-                    R.string.item_details,
-                    item.quantity,
-                    item.category.ifBlank { "-" },
-                )
+            textCategory.text = item.category.ifBlank { root.context.getString(R.string.no_category) }
+            textQuantity.text = root.context.getString(R.string.item_quantity, item.quantity)
+            root.alpha = if (item.isBought) BOUGHT_ALPHA else 1f
             checkBought.isChecked = item.isBought
             checkBought.setOnClickListener { onBoughtClick(item) }
             root.setOnClickListener { onItemClick(item) }
@@ -63,5 +60,10 @@ class ShoppingAdapter(
             oldItem: ShoppingItem,
             newItem: ShoppingItem,
         ) = oldItem == newItem
+    }
+
+    private companion object {
+        // Купените продукти са леко избледнели
+        const val BOUGHT_ALPHA = 0.55f
     }
 }

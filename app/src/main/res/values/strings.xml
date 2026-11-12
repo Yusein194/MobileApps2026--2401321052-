@@ -3,7 +3,8 @@
     <string name="title_list">Моят списък</string>
     <string name="title_item">Продукт</string>
     <string name="add_item">Добави</string>
-    <string name="empty_list">Списъкът е празен.\nНатисни „Добави“, за да започнеш.</string>
+    <string name="empty_title">Списъкът е празен</string>
+    <string name="empty_hint">Натисни „Добави“, за да започнеш</string>
     <string name="hint_name">Име на продукта</string>
     <string name="hint_quantity">Количество</string>
     <string name="hint_category">Категория (по желание)</string>
@@ -12,8 +13,16 @@
     <string name="error_quantity">Въведи количество, по-голямо от 0</string>
     <string name="item_deleted">Продуктът е изтрит</string>
     <string name="undo">Отмени</string>
-    <string name="item_details">%1$d бр. · %2$s</string>
+    <string name="item_quantity">×%1$d</string>
+    <string name="no_category">Без категория</string>
     <string name="mark_bought">Купено</string>
     <string name="share_list">Сподели списъка</string>
     <string name="nothing_to_share">Няма некупени продукти за споделяне</string>
+    <string name="summary_all_bought">Всичко е купено! 🎉</string>
+    <string name="summary_progress">Купени: %1$d от %2$d</string>
+
+    <plurals name="summary_remaining">
+        <item quantity="one">Остава %d продукт</item>
+        <item quantity="other">Остават %d продукта</item>
+    </plurals>
 </resources>
