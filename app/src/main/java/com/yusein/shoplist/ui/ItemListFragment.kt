@@ -54,10 +54,25 @@ class ItemListFragment : Fragment() {
         // Observer pattern: списъкът се обновява сам при промяна в базата
         viewModel.items.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
-            binding.emptyText.isVisible = items.isEmpty()
+            showSummary(ListSummary.of(items))
         }
 
         binding.fabAdd.setOnClickListener { openEditor(0L) }
+    }
+
+    private fun showSummary(summary: ListSummary) {
+        val isEmpty = summary.total == 0
+        binding.emptyState.isVisible = isEmpty
+        binding.summaryCard.isVisible = !isEmpty
+
+        binding.textSummaryTitle.text =
+            if (summary.remaining == 0) {
+                getString(R.string.summary_all_bought)
+            } else {
+                resources.getQuantityString(R.plurals.summary_remaining, summary.remaining, summary.remaining)
+            }
+        binding.textSummarySubtitle.text = getString(R.string.summary_progress, summary.bought, summary.total)
+        binding.progressBought.setProgressCompat(summary.progressPercent, true)
     }
 
     private fun setupShareMenu() {

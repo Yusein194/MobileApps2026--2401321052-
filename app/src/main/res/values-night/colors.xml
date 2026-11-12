@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="shop_primary">#A1D39A</color>
+    <color name="shop_on_primary">#0A390F</color>
+    <color name="shop_primary_container">#235024</color>
+    <color name="shop_on_primary_container">#BCF0B4</color>
+    <color name="shop_secondary">#B9CCB4</color>
+    <color name="shop_on_secondary">#253423</color>
+    <color name="shop_secondary_container">#3B4B39</color>
+    <color name="shop_on_secondary_container">#D5E8CF</color>
+    <color name="shop_background">#10140F</color>
+    <color name="shop_on_surface">#E0E4DA</color>
+    <color name="shop_on_surface_variant">#C2C9BB</color>
+    <color name="shop_outline">#8C9388</color>
+    <color name="shop_outline_variant">#42493F</color>
+    <color name="shop_surface_container_lowest">#0B0F0A</color>
+    <color name="shop_surface_container_low">#191D17</color>
+    <color name="shop_surface_container">#1D211B</color>
+    <color name="shop_surface_container_high">#272B25</color>
+    <color name="shop_surface_container_highest">#323630</color>
+</resources>
