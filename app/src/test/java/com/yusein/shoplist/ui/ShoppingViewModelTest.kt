@@ -99,6 +99,17 @@ class ShoppingViewModelTest {
     }
 
     @Test
+    fun clearBoughtRemovesOnlyBoughtItems() {
+        viewModel.save(null, "Мляко", "2", "Храна")
+        viewModel.save(null, "Хляб", "1", "Храна")
+        viewModel.toggleBought(repository.storedItems.first { it.name == "Мляко" })
+
+        viewModel.clearBought()
+
+        assertEquals("Хляб", repository.storedItems.single().name)
+    }
+
+    @Test
     fun itemsLiveDataReflectsRepository() {
         viewModel.save(null, "Мляко", "2", "Храна")
 

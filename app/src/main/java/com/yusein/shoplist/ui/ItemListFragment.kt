@@ -17,6 +17,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.yusein.shoplist.R
 import com.yusein.shoplist.databinding.FragmentItemListBinding
@@ -58,12 +59,14 @@ class ItemListFragment : Fragment() {
         }
 
         binding.fabAdd.setOnClickListener { openEditor(0L) }
+        binding.buttonClearBought.setOnClickListener { confirmClearBought() }
     }
 
     private fun showSummary(summary: ListSummary) {
         val isEmpty = summary.total == 0
         binding.emptyState.isVisible = isEmpty
         binding.summaryCard.isVisible = !isEmpty
+        binding.buttonClearBought.isVisible = summary.bought > 0
 
         binding.textSummaryTitle.text =
             if (summary.remaining == 0) {
@@ -110,6 +113,24 @@ class ItemListFragment : Fragment() {
                 putExtra(Intent.EXTRA_TEXT, ShareTextBuilder.build(items))
             }
         startActivity(Intent.createChooser(sendIntent, getString(R.string.share_list)))
+    }
+
+    private fun confirmClearBought() {
+        val boughtCount =
+            viewModel.items.value
+                .orEmpty()
+                .count { it.isBought }
+        if (boughtCount == 0) {
+            Snackbar.make(binding.root, R.string.nothing_bought, Snackbar.LENGTH_SHORT).show()
+            return
+        }
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.clear_bought_title)
+            .setMessage(resources.getQuantityString(R.plurals.clear_bought_message, boughtCount, boughtCount))
+            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(R.string.delete) { _, _ -> viewModel.clearBought() }
+            .show()
     }
 
     private fun openEditor(itemId: Long) {

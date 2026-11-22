@@ -20,9 +20,19 @@
     <string name="nothing_to_share">Няма некупени продукти за споделяне</string>
     <string name="summary_all_bought">Всичко е купено! 🎉</string>
     <string name="summary_progress">Купени: %1$d от %2$d</string>
+    <string name="clear_bought">Изчисти купените</string>
+    <string name="clear_bought_title">Изчисти купените?</string>
+    <string name="nothing_bought">Няма купени продукти</string>
+    <string name="delete">Изтрий</string>
+    <string name="cancel">Отказ</string>
 
     <plurals name="summary_remaining">
         <item quantity="one">Остава %d продукт</item>
         <item quantity="other">Остават %d продукта</item>
+    </plurals>
+
+    <plurals name="clear_bought_message">
+        <item quantity="one">Ще бъде изтрит %d купен продукт.</item>
+        <item quantity="other">Ще бъдат изтрити %d купени продукта.</item>
     </plurals>
 </resources>

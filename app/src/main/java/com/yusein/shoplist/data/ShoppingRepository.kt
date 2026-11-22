@@ -12,6 +12,8 @@ interface ShoppingRepository {
     suspend fun update(item: ShoppingItem)
 
     suspend fun delete(item: ShoppingItem)
+
+    suspend fun deleteBought(): Int
 }
 
 class RoomShoppingRepository(
@@ -26,4 +28,6 @@ class RoomShoppingRepository(
     override suspend fun update(item: ShoppingItem) = dao.update(item)
 
     override suspend fun delete(item: ShoppingItem) = dao.delete(item)
+
+    override suspend fun deleteBought(): Int = dao.deleteBought()
 }
