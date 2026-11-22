@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.recyclerview)
+    implementation(libs.coil)
 
     // Търсене на memory leaks (само в debug)
     debugImplementation(libs.leakcanary.android)

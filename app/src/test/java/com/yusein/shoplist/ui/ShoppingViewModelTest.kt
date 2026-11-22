@@ -99,6 +99,13 @@ class ShoppingViewModelTest {
     }
 
     @Test
+    fun saveStoresPhotoPath() {
+        viewModel.save(null, "Мляко", "2", "Храна", photoPath = "/photos/milk.jpg")
+
+        assertEquals("/photos/milk.jpg", repository.storedItems.single().photoPath)
+    }
+
+    @Test
     fun clearBoughtRemovesOnlyBoughtItems() {
         viewModel.save(null, "Мляко", "2", "Храна")
         viewModel.save(null, "Хляб", "1", "Храна")

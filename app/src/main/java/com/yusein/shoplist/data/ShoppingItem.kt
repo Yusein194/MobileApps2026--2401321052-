@@ -11,4 +11,5 @@ data class ShoppingItem(
     val quantity: Int,
     val category: String,
     val isBought: Boolean = false,
+    val photoPath: String? = null,
 )

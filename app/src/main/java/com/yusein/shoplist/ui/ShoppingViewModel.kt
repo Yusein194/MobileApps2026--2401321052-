@@ -26,14 +26,20 @@ class ShoppingViewModel(
         name: String,
         quantityText: String,
         category: String,
+        photoPath: String? = null,
     ): ValidationResult {
         val result = ItemValidator.validate(name, quantityText)
         if (result != ValidationResult.Valid) return result
 
         val quantity = quantityText.trim().toInt()
         val item =
-            existing?.copy(name = name.trim(), quantity = quantity, category = category.trim())
-                ?: ShoppingItem(name = name.trim(), quantity = quantity, category = category.trim())
+            existing?.copy(name = name.trim(), quantity = quantity, category = category.trim(), photoPath = photoPath)
+                ?: ShoppingItem(
+                    name = name.trim(),
+                    quantity = quantity,
+                    category = category.trim(),
+                    photoPath = photoPath,
+                )
 
         viewModelScope.launch {
             if (existing == null) repository.insert(item) else repository.update(item)
