@@ -53,6 +53,10 @@ class ShoppingViewModel(
         viewModelScope.launch { repository.insert(item) }
     }
 
+    fun clearBought() {
+        viewModelScope.launch { repository.deleteBought() }
+    }
+
     companion object {
         val Factory: ViewModelProvider.Factory =
             viewModelFactory {

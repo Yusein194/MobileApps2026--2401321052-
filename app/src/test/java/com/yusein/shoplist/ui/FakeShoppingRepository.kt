@@ -33,6 +33,13 @@ class FakeShoppingRepository : ShoppingRepository {
         publish()
     }
 
+    override suspend fun deleteBought(): Int {
+        val boughtCount = storedItems.count { it.isBought }
+        storedItems.removeAll { it.isBought }
+        publish()
+        return boughtCount
+    }
+
     private fun publish() {
         liveItems.value = storedItems.toList()
     }
