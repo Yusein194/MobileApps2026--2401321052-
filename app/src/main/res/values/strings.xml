@@ -26,6 +26,15 @@
     <string name="delete">Изтрий</string>
     <string name="cancel">Отказ</string>
 
+    <string-array name="category_suggestions">
+        <item>Храна</item>
+        <item>Напитки</item>
+        <item>Плодове и зеленчуци</item>
+        <item>Хигиена</item>
+        <item>Дом</item>
+        <item>Други</item>
+    </string-array>
+
     <plurals name="summary_remaining">
         <item quantity="one">Остава %d продукт</item>
         <item quantity="other">Остават %d продукта</item>

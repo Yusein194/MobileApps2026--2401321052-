@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.chip.Chip
 import com.yusein.shoplist.R
 import com.yusein.shoplist.data.ShoppingItem
 import com.yusein.shoplist.databinding.FragmentAddEditItemBinding
@@ -48,7 +49,20 @@ class AddEditItemFragment : Fragment() {
             }
         }
 
+        setupCategoryChips()
         binding.buttonSave.setOnClickListener { save() }
+    }
+
+    private fun setupCategoryChips() {
+        resources.getStringArray(R.array.category_suggestions).forEach { category ->
+            val chip = Chip(requireContext())
+            chip.text = category
+            chip.setOnClickListener {
+                binding.editCategory.setText(category)
+                binding.editCategory.setSelection(category.length)
+            }
+            binding.chipGroupCategories.addView(chip)
+        }
     }
 
     private fun save() {
