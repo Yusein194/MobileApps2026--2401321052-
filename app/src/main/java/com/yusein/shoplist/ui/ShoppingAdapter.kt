@@ -3,12 +3,18 @@ package com.yusein.shoplist.ui
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.dispose
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.yusein.shoplist.R
 import com.yusein.shoplist.data.ShoppingItem
 import com.yusein.shoplist.databinding.ItemShoppingBinding
+import java.io.File
 
 class ShoppingAdapter(
     private val onItemClick: (ShoppingItem) -> Unit,
@@ -42,9 +48,24 @@ class ShoppingAdapter(
             textCategory.text = item.category.ifBlank { root.context.getString(R.string.no_category) }
             textQuantity.text = root.context.getString(R.string.item_quantity, item.quantity)
             root.alpha = if (item.isBought) BOUGHT_ALPHA else 1f
+            showThumbnail(imageThumb, item.photoPath)
             checkBought.isChecked = item.isBought
             checkBought.setOnClickListener { onBoughtClick(item) }
             root.setOnClickListener { onItemClick(item) }
+        }
+    }
+
+    private fun showThumbnail(
+        imageView: ImageView,
+        photoPath: String?,
+    ) {
+        imageView.isVisible = photoPath != null
+        if (photoPath == null) {
+            imageView.dispose()
+        } else {
+            imageView.load(File(photoPath)) {
+                transformations(RoundedCornersTransformation(THUMB_CORNER_RADIUS))
+            }
         }
     }
 
@@ -65,5 +86,6 @@ class ShoppingAdapter(
     private companion object {
         // Купените продукти са леко избледнели
         const val BOUGHT_ALPHA = 0.55f
+        const val THUMB_CORNER_RADIUS = 16f
     }
 }

@@ -25,6 +25,10 @@
     <string name="nothing_bought">Няма купени продукти</string>
     <string name="delete">Изтрий</string>
     <string name="cancel">Отказ</string>
+    <string name="take_photo">Снимай продукта</string>
+    <string name="retake_photo">Снимай отново</string>
+    <string name="no_camera_app">Няма приложение за камера</string>
+    <string name="photo_description">Снимка на продукта</string>
 
     <string-array name="category_suggestions">
         <item>Храна</item>
