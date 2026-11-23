@@ -21,8 +21,11 @@ android {
 
     buildTypes {
         release {
+            // Подписва release APK-а с debug ключа, за да може да се инсталира директно
+            signingConfig = signingConfigs.getByName("debug")
+            // R8 чупи Navigation Component при стартиране, затова е изключен
             optimization {
-                enable = true
+                enable = false
                 packageScope = setOf("androidx.**", "kotlin.**", "kotlinx.**")
             }
         }
